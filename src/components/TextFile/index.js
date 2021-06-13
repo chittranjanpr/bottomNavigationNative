@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, Platform } from 'react-native';
 
 import { moderateScale } from '../../utils/scaling';
 import { colors } from '../../styles/colors';
@@ -15,7 +15,7 @@ const TextFile = (props) => {
         <Text
             {...props}
             numberOfLines={props.totalLines}
-            style={[props.style, { color, fontSize, fontWeight: textWeight, fontFamily: textFont ? textFont : fonts.ROBOTO }]}
+            style={[props.style, { color, fontSize, fontWeight: textWeight, fontFamily: textFont ? textFont : Platform.OS === 'android' ? fonts.ROBOTO : null }]}
         >
             { desc}
             {
@@ -23,7 +23,7 @@ const TextFile = (props) => {
                     <Text
                         style={[{
                             color: insideTextColor, fontSize: useFontScaling ? moderateScale(insideTextSize, 0.3) : insideTextSize,
-                            fontWeight: insideTextWeight, fontFamily: insideTextFont ? insideTextFont : fonts.ROBOTO
+                            fontWeight: insideTextWeight, fontFamily: insideTextFont ? insideTextFont : Platform.OS === 'android' ? fonts.ROBOTO : null
                         }]}
                     >{insideTextDesc}</Text>
                     :
